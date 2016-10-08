@@ -1,6 +1,6 @@
 package Equipamento;
 
-public class Televisao extends Equipamento {
+public class Televisao extends Eletronico {
 
 	// Construtor passando os argumentos da classe pai
 	// Invocando os argumentos da classe pai
@@ -11,20 +11,7 @@ public class Televisao extends Equipamento {
 	
 	
 	
-	@Override
-	public double calcularPrecoFinal(){
-		
-	 
-	 //double preco = 0.02;
-	 
-	// preco = (0.02 * this.getPreco())+this.getPreco();
-	 
-	// preco = preco + this.getPreco();
-	 
-		
-		return getPreco() * 1.02;
-		
-	}
+
 	
 	
 

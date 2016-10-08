@@ -2,7 +2,7 @@ package Equipamento;
 
 import java.io.ObjectInputStream.GetField;
 
-public class Impressora extends Equipamento {
+public class Impressora extends Eletronico {
 
 	private int pontosPorPolegada;
 
@@ -23,21 +23,6 @@ public class Impressora extends Equipamento {
 	}
 
 	
-	@Override
-	public double calcularPrecoFinal(){
-		
-	 
-	 //double preco = 0.02;
-	 
-	// preco = (0.02 * this.getPreco())+this.getPreco();
-	 
-	// preco = preco + this.getPreco();
-	 
-		
-		return getPreco() * 1.05;
-		
-	}
-
 	
 	public int getPontosPorPolegada() {
 		return pontosPorPolegada;
