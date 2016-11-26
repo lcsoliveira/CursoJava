@@ -1,9 +1,9 @@
 package com.dextraining.entidade;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 /**
  * Exemplo de mapeamento de entidade. <br>
@@ -11,7 +11,9 @@ import javax.persistence.Id;
  * no banco de dados.
  *
  */
-@Entity
+
+//Esta notação deixa uma herança somente no java, não gerando uma entidade no banco 
+@MappedSuperclass 
 public class Entidade {
 
 	/**

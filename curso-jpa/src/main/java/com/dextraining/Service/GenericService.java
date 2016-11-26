@@ -36,8 +36,9 @@ public class GenericService<T> {
 			// vai fechar
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			em.getTransaction().rollback();
-			throw new RuntimeException(e);
+			throw  e;
 		}
 
 		finally {
@@ -45,6 +46,8 @@ public class GenericService<T> {
 		}
 	}
 	
+	
+	//Neste método vamos fazer uma busca no banco de dados
 	public T buscarPorId(Long id) {
 		EntityManager em = EntityManagerUtil.criarEntityMaganer();
 		
