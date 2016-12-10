@@ -2,27 +2,27 @@ package br.com.javaweb.gerenciador.web;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import br.com.javaweb.gerenciador.Empresa;
-import br.com.javaweb.gerenciador.dao.EmpresaDAO;
+import br.com.javaweb.gerenciador.Usuario;
+import br.com.javaweb.gerenciador.dao.UsuarioDAO;
 
 /**
- * Servlet implementation class AdicionarEmpresa
+ * Servlet implementation class Login
  */
-@WebServlet("/adicionaEmpresa")
-public class AdicionarEmpresa extends HttpServlet {
+@WebServlet("/login")
+public class LoginUsandoSession extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdicionarEmpresa() {
+	public LoginUsandoSession() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,27 +43,21 @@ public class AdicionarEmpresa extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// doGet(request, response);
-
-		String nome = request.getParameter("nome");
-
-		Empresa empresa = new Empresa(nome);
-
-		new EmpresaDAO().adiciona(empresa);
 		
-		//Aqui estavamos implementando o código direto
+
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+
+		Usuario usuario = new UsuarioDAO().buscaPorEmailESenha(email, senha);		
 		
-		// PrintWriter writer = response.getWriter();
-		// writer.println("<html> <body> Empresa: "+ nomeEmpresa +
-		// " inserida com sucesso!" +
-		// "</body><html>");
-
-		request.setAttribute("empresa", empresa.getNome());
-
-		RequestDispatcher disp = request.getRequestDispatcher("WEB-INF/paginas/novaEmpresa.jsp");
-
-		disp.forward(request, response);
+		if (usuario == null) {
+			response.sendRedirect("/ExemploServlets/erro.html");
+		} 
+		else {
+			HttpSession session = request.getSession();
+			session.setAttribute("usuario.logado", usuario );
+			response.sendRedirect("/ExemploServlets/index.html");
+		}
 	}
 
 }

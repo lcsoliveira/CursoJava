@@ -1,7 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Login Form</title>
+<meta charset="UTF-8">
+<title>Nova Empresa</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -18,7 +20,6 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#myNavbar">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -29,35 +30,17 @@
 
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
-
-	        <ul class="nav navbar-nav navbar-right">
-	            <li>
-	            	<div id="logout">
-	            	<form id="frmLogout" action="logout" method="post">
-	            		<br/>
-						<input type="submit" value="Logout" />
-					</form>
-					</div>	
-	            </li>
-	        </ul>						
 		</div>
 		</div>
 	</nav>
-
-	<h3>Bem vindo ao nosso sistema Java Web!<br/></h3>
 	<br/>
+	
 	<hr>
 	
-	<div id="frmCriarEmpresa">
-		<h3>Adicionar nova empresa:</h3>
-		<form id="novaEmpresa" action="adicionaEmpresa" method="post">
-			Nome: <input type="text" name="nomeEmpresa" />
-			<br/>
-			<br/>
-			<input type="submit" value="Enviar" />
-		</form>
+	
+	
+	<div class="alert alert-success">
+		<strong>Empresa: ${empresa}</strong> Adicionada com Sucesso!
 	</div>
-	
-	
 </body>
 </html>

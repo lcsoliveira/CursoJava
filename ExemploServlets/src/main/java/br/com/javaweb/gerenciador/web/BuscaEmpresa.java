@@ -19,65 +19,94 @@ import br.com.javaweb.gerenciador.dao.EmpresaDAO;
 @WebServlet("/busca") // Aqui estamos definindo qual é a URI da service
 public class BuscaEmpresa extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BuscaEmpresa() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	// String filtro;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	
-		
-		String filtro = request.getParameter("filtro");
-		
-		Collection<Empresa> empresas = new EmpresaDAO().buscaPorSimilaridade(filtro);
-		
-		StringBuffer html = new StringBuffer();
-		
-		html.append("<html>");
-		html.append("<body>");
-		html.append("Resultado da busca: <br/>");
-		html.append("</body>");
-		html.append("</html>");
-		
-		html.append("<ul>");
-		
-	    for(Empresa empresa : empresas) {
-	    	html.append("<li>" + empresa.getId() + ": " 
-	    + empresa.getNome() + "</li>");
-	    }
-	    
-	    html.append("</ul>");
-		
-		html.append("</body>");
-		html.append("</html>");
-		
-		PrintWriter out = response.getWriter();
-		out.println(html);
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	
-		
-		
+	public BuscaEmpresa() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
+
+		System.out.println("Inicializando a Servlet " + this);
+	}
+
+	@Override
+	public void destroy() {
+		super.destroy();
+		System.out.println("Destruindo a Servlet" + this);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		String filtro = request.getParameter("filtro");
+
+		Collection<Empresa> empresas = new EmpresaDAO().buscaPorSimilaridade(filtro);
+		
+		request.setAttribute("empresas", empresas);
+		
+		request.getRequestDispatcher("/WEB-INF/paginas/busca.jsp").forward(request, response);
 		
 		
-		doGet(request, response);
 		
+		
+		
+		
+		// Fazendo a thread dormir
+
+		// try {
+		// Thread.sleep(5000);
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
+
+		// StringBuffer html = new StringBuffer();
+		//
+		// html.append("<html>");
+		// html.append("<body>");
+		// html.append("Resultado da busca: <br/>");
+		// html.append("</body>");
+		// html.append("</html>");
+		//
+		// html.append("<ul>");
+		//
+		// for (Empresa empresa : empresas) {
+		// html.append("<li>" + empresa.getId() + ": " + empresa.getNome() +
+		// "</li>");
+		// }
+		//
+		// html.append("</ul>");
+		//
+		// html.append("</body>");
+		// html.append("</html>");
+		//
+		// PrintWriter out = response.getWriter();
+		// out.println(html);
+		//
+		// response.getWriter().append("Served at:
+		// ").append(request.getContextPath());
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 
 }
